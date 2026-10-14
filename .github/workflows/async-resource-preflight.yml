@@ -21,12 +21,12 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-          ref: 6e36168907b59337eda1d7b79c52fe5cbadd9120
+          ref: 2f56c65aebc65619d4f29884bd982d6b35329295
 
       - name: Verify CHANGELOG.md was updated
         env:
           BASE_SHA: 39c2923584a1f0dadbc9988ef250f387afe6576b
-          HEAD_SHA: 6e36168907b59337eda1d7b79c52fe5cbadd9120
+          HEAD_SHA: 2f56c65aebc65619d4f29884bd982d6b35329295
         run: |
           if git diff --name-only "$BASE_SHA...$HEAD_SHA" | grep -qx 'CHANGELOG.md'; then
             echo "CHANGELOG.md was updated."
@@ -44,15 +44,15 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: 6e36168907b59337eda1d7b79c52fe5cbadd9120
+          ref: 2f56c65aebc65619d4f29884bd982d6b35329295
           fetch-depth: 0
 
       - name: Verify exact contribution and merge baseline
         run: |
-          test "$(git rev-parse HEAD)" = "6e36168907b59337eda1d7b79c52fe5cbadd9120"
+          test "$(git rev-parse HEAD)" = "2f56c65aebc65619d4f29884bd982d6b35329295"
           git merge-base --is-ancestor 39c2923584a1f0dadbc9988ef250f387afe6576b HEAD
           git merge --no-commit --no-ff 39c2923584a1f0dadbc9988ef250f387afe6576b
-          test "$(git rev-parse HEAD)" = "6e36168907b59337eda1d7b79c52fe5cbadd9120"
+          test "$(git rev-parse HEAD)" = "2f56c65aebc65619d4f29884bd982d6b35329295"
           git diff --exit-code
 
       - name: Set up Node.js
@@ -91,15 +91,15 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: 6e36168907b59337eda1d7b79c52fe5cbadd9120
+          ref: 2f56c65aebc65619d4f29884bd982d6b35329295
           fetch-depth: 0
 
       - name: Verify exact contribution and merge baseline
         run: |
-          test "$(git rev-parse HEAD)" = "6e36168907b59337eda1d7b79c52fe5cbadd9120"
+          test "$(git rev-parse HEAD)" = "2f56c65aebc65619d4f29884bd982d6b35329295"
           git merge-base --is-ancestor 39c2923584a1f0dadbc9988ef250f387afe6576b HEAD
           git merge --no-commit --no-ff 39c2923584a1f0dadbc9988ef250f387afe6576b
-          test "$(git rev-parse HEAD)" = "6e36168907b59337eda1d7b79c52fe5cbadd9120"
+          test "$(git rev-parse HEAD)" = "2f56c65aebc65619d4f29884bd982d6b35329295"
           git diff --exit-code
 
       - name: Set up Node.js
@@ -124,7 +124,7 @@ jobs:
         if: matrix.node-version == '24'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: coverage-candidate-6e36168907b59337eda1d7b79c52fe5cbadd9120
+          name: coverage-candidate-2f56c65aebc65619d4f29884bd982d6b35329295
           path: coverage/
           overwrite: true
           if-no-files-found: error
