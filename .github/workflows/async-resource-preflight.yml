@@ -21,12 +21,12 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-          ref: 2f56c65aebc65619d4f29884bd982d6b35329295
+          ref: eb8694ee80e0c2c0a03274c6acb1c6a43f578d64
 
       - name: Verify CHANGELOG.md was updated
         env:
-          BASE_SHA: 39c2923584a1f0dadbc9988ef250f387afe6576b
-          HEAD_SHA: 2f56c65aebc65619d4f29884bd982d6b35329295
+          BASE_SHA: 5d5bb788f30a308106c33e09686a4d7fd5a4829d
+          HEAD_SHA: eb8694ee80e0c2c0a03274c6acb1c6a43f578d64
         run: |
           if git diff --name-only "$BASE_SHA...$HEAD_SHA" | grep -qx 'CHANGELOG.md'; then
             echo "CHANGELOG.md was updated."
@@ -44,15 +44,15 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: 2f56c65aebc65619d4f29884bd982d6b35329295
+          ref: eb8694ee80e0c2c0a03274c6acb1c6a43f578d64
           fetch-depth: 0
 
       - name: Verify exact contribution and merge baseline
         run: |
-          test "$(git rev-parse HEAD)" = "2f56c65aebc65619d4f29884bd982d6b35329295"
-          git merge-base --is-ancestor 39c2923584a1f0dadbc9988ef250f387afe6576b HEAD
-          git merge --no-commit --no-ff 39c2923584a1f0dadbc9988ef250f387afe6576b
-          test "$(git rev-parse HEAD)" = "2f56c65aebc65619d4f29884bd982d6b35329295"
+          test "$(git rev-parse HEAD)" = "eb8694ee80e0c2c0a03274c6acb1c6a43f578d64"
+          git merge-base --is-ancestor 5d5bb788f30a308106c33e09686a4d7fd5a4829d HEAD
+          git merge --no-commit --no-ff 5d5bb788f30a308106c33e09686a4d7fd5a4829d
+          test "$(git rev-parse HEAD)" = "eb8694ee80e0c2c0a03274c6acb1c6a43f578d64"
           git diff --exit-code
 
       - name: Set up Node.js
@@ -69,6 +69,9 @@ jobs:
 
       - name: Lint
         run: npm run lint
+
+      - name: Generate API documentation
+        run: npm run docs
 
       - name: Check types
         run: npm run typecheck
@@ -91,15 +94,15 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: 2f56c65aebc65619d4f29884bd982d6b35329295
+          ref: eb8694ee80e0c2c0a03274c6acb1c6a43f578d64
           fetch-depth: 0
 
       - name: Verify exact contribution and merge baseline
         run: |
-          test "$(git rev-parse HEAD)" = "2f56c65aebc65619d4f29884bd982d6b35329295"
-          git merge-base --is-ancestor 39c2923584a1f0dadbc9988ef250f387afe6576b HEAD
-          git merge --no-commit --no-ff 39c2923584a1f0dadbc9988ef250f387afe6576b
-          test "$(git rev-parse HEAD)" = "2f56c65aebc65619d4f29884bd982d6b35329295"
+          test "$(git rev-parse HEAD)" = "eb8694ee80e0c2c0a03274c6acb1c6a43f578d64"
+          git merge-base --is-ancestor 5d5bb788f30a308106c33e09686a4d7fd5a4829d HEAD
+          git merge --no-commit --no-ff 5d5bb788f30a308106c33e09686a4d7fd5a4829d
+          test "$(git rev-parse HEAD)" = "eb8694ee80e0c2c0a03274c6acb1c6a43f578d64"
           git diff --exit-code
 
       - name: Set up Node.js
@@ -124,7 +127,7 @@ jobs:
         if: matrix.node-version == '24'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: coverage-candidate-2f56c65aebc65619d4f29884bd982d6b35329295
+          name: coverage-candidate-eb8694ee80e0c2c0a03274c6acb1c6a43f578d64
           path: coverage/
           overwrite: true
           if-no-files-found: error
@@ -152,7 +155,7 @@ jobs:
         if: matrix.node-version == '24'
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: 39c2923584a1f0dadbc9988ef250f387afe6576b
+          ref: 5d5bb788f30a308106c33e09686a4d7fd5a4829d
           path: .bundle-size-base
           persist-credentials: false
 
@@ -201,7 +204,7 @@ jobs:
       - name: Check out exact PR base
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: 39c2923584a1f0dadbc9988ef250f387afe6576b
+          ref: 5d5bb788f30a308106c33e09686a4d7fd5a4829d
           persist-credentials: false
 
       - name: Set up Node.js
@@ -223,7 +226,7 @@ jobs:
       - name: Upload baseline coverage
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: coverage-base-39c2923584a1f0dadbc9988ef250f387afe6576b
+          name: coverage-base-5d5bb788f30a308106c33e09686a4d7fd5a4829d
           path: coverage/
           overwrite: true
           if-no-files-found: error
